@@ -8,9 +8,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { MDXProvider } from "@mdx-js/react"
+import loadable from "@loadable/component"
 
 import Header from "./header"
 import "./layout.css"
+
+const Sketch = loadable(() => import("react-p5"))
+const shortcodes = { Sketch }
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -33,7 +38,9 @@ const Layout = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
-        <main>{children}</main>
+        <MDXProvider components={shortcodes}>
+          <main>{children}</main>
+        </MDXProvider>
         <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
