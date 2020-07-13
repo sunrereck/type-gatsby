@@ -1,70 +1,29 @@
 import React from "react"
-import Sketch from "react-p5"
+// import Sketch from "react-p5"
 
-class App extends React.Component {
-  url =
-    "https://quickdrawfiles.appspot.com/drawing/cat?isAnimated=false&format=json&key="
+import loadable from "@loadable/component"
+const Sketch = loadable(() => import("react-p5"))
 
-  strokeIndex = 0
-  index = 0
-  cat
-  prevx
-  prevy
-  keyInput
-  start
+const P54 = ({}) => {
+  let x = 50
+  const y = 50
 
-  async newCat(p5) {
-    let apiKey = "AIzaSyCLxdiMV5-46xuFWFbdDhVoJi7DMwe-H9Q" // keyInput.value();
-    p5.loadJSON(this.url + apiKey, data => this.gotCat(p5, data))
-  }
-
-  async gotCat(p5, data) {
-    p5.background(255)
-    this.cat = await data.drawing
-  }
-
-  render() {
+  if (typeof window !== "undefined") {
     return (
-      <div className="App">
-        <Sketch
-          setup={(p5, parentRef) => {
-            p5.createCanvas(255, 255).parent(parentRef)
-            this.newCat(p5)
-          }}
-          draw={p5 => {
-            if (this.cat) {
-              let x = this.cat[this.strokeIndex][0][this.index]
-              let y = this.cat[this.strokeIndex][1][this.index]
-              p5.stroke(0)
-              p5.strokeWeight(3)
-
-              if (this.prevx !== undefined) {
-                p5.line(this.prevx, this.prevy, x, y)
-              }
-
-              this.index++
-
-              if (this.index === this.cat[this.strokeIndex][0].length) {
-                this.strokeIndex++
-                this.prevx = undefined
-                this.prevy = undefined
-                this.index = 0
-
-                if (this.strokeIndex === this.cat.length) {
-                  this.cat = undefined
-                  this.strokeIndex = 0
-                  setTimeout(this.newCat(p5), 100)
-                }
-              } else {
-                this.prevx = x
-                this.prevy = y
-              }
-            }
-          }}
-        />
-      </div>
+      <Sketch
+        setup={(p5, canvasParentRef) => {
+          p5.createCanvas(500, 500).parent(canvasParentRef)
+        }}
+        draw={p5 => {
+          p5.background(0)
+          p5.ellipse(x, y, 70, 70)
+          x++
+        }}
+      />
     )
+  } else {
+    return null
   }
 }
 
-export default App
+export default P54

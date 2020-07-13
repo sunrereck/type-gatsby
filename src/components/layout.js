@@ -38,9 +38,9 @@ const Layout = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
-        <MDXProvider components={shortcodes}>
-          <main>{children}</main>
-        </MDXProvider>
+        {/* <MDXProvider components={shortcodes}> */}
+        <main>{children}</main>
+        {/* </MDXProvider> */}
         <footer>
           © {new Date().getFullYear()}, Built with
           {` `}

@@ -10,8 +10,6 @@ require("ts-node").register()
 
 const { createPages } = require("./src/lib/createPages")
 
-exports.createPages = createPages
-
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html" || stage === "develop-html") {
     actions.setWebpackConfig({
@@ -26,3 +24,5 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     })
   }
 }
+
+exports.createPages = createPages

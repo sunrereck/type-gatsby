@@ -35,13 +35,6 @@ module.exports = {
         path: `${__dirname}/src/content/posts`,
       },
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "assets",
-        path: `${__dirname}/src/content/p5`,
-      },
-    },
     // `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-mdx`,
