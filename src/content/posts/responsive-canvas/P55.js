@@ -19,7 +19,17 @@ const App = () => {
       <div className="App" ref={ref}>
         <Sketch
           setup={(p5, parentRef) => {
-            p5.createCanvas(size.width - 100, 300).parent(parentRef)
+            let initWidth = 640
+            let initHeight = 300
+
+            let canvasWidth = initWidth
+            let canvasHeight = initHeight
+
+            if (size.width < initWidth) {
+              canvasWidth = size.width
+            }
+
+            p5.createCanvas(canvasWidth, canvasHeight).parent(parentRef)
             console.log(p5)
           }}
           draw={p5 => {
