@@ -19,14 +19,16 @@ const App = () => {
       <div className="App" ref={ref}>
         <Sketch
           setup={(p5, parentRef) => {
-            let initWidth = 640
-            let initHeight = 300
+            let initWidth = 400
+            let initHeight = 400
+            const ratio = initWidth / initHeight
 
             let canvasWidth = initWidth
             let canvasHeight = initHeight
 
             if (size.width < initWidth) {
               canvasWidth = size.width
+              canvasHeight = canvasWidth / ratio
             }
 
             p5.createCanvas(canvasWidth, canvasHeight).parent(parentRef)
